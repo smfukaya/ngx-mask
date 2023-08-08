@@ -1,3 +1,9 @@
+<a name="8.2.1">
+
+# [8.2.1 bugfix](2023-08-08)
+
+Fix for #984 - Cursor jumps at beginning ifthe model is set
+
 <a name="8.2.0">
 
 # [8.2.0 bugfix and breaking change](2020-01-17)

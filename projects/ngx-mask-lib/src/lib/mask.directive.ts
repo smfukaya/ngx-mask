@@ -416,7 +416,7 @@ export class MaskDirective implements ControlValueAccessor, OnChanges {
   @HostListener('ngModelChange', ['$event'])
   // tslint:disable-next-line: no-any
   public onModelChange(e: any): void {
-    if (!e) {
+    if ((e === '' || e === null || e === undefined) && this._maskService.actualValue) {
       this._maskService.actualValue = '';
     }
   }

@@ -417,4 +417,39 @@ describe('Separator: Mask', () => {
     expect(inputTarget.value).toBe('134');
     expect(inputTarget.selectionStart).toEqual(0);
   });
+  
+  it('cursor should move forward if the input starts with -, or 0, or 0.0, or 0.00, or 0.0000000', () => {
+    component.mask = 'separator.8';
+    component.specialCharacters = [',', '.'];
+    component.form.setValue(0.723);
+    const debugElement: DebugElement = fixture.debugElement.query(By.css('input'));
+    const inputTarget: HTMLInputElement = debugElement.nativeElement as HTMLInputElement;
+    spyOnProperty(document, 'activeElement').and.returnValue(inputTarget);
+    fixture.detectChanges();
+
+    inputTarget.value = '0';
+    inputTarget.selectionStart = 1;
+    inputTarget.selectionEnd = 1;
+    debugElement.triggerEventHandler('input', { target: inputTarget });
+
+    expect(inputTarget.value).toBe('0');
+    expect(inputTarget.selectionStart).toEqual(1);
+
+    inputTarget.value = '-';
+    inputTarget.selectionStart = 1;
+    inputTarget.selectionEnd = 1;
+    debugElement.triggerEventHandler('input', { target: inputTarget });
+
+    expect(inputTarget.value).toBe('-');
+    expect(inputTarget.selectionStart).toEqual(1);
+
+    inputTarget.value = '0.0';
+    inputTarget.selectionStart = 3;
+    inputTarget.selectionEnd = 3;
+    debugElement.triggerEventHandler('input', { target: inputTarget });
+
+    expect(inputTarget.value).toBe('0.0');
+    expect(inputTarget.selectionStart).toEqual(3);
+	});
+  
 });
